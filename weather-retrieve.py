@@ -10,9 +10,12 @@ url='http://api.weatherstack.com/current?'
 with open('weatherAPI.txt','r') as f:
     api_key=f.read()
     
-    
+params = {}
+params['access_key']=api_key
+params['query']=city    
 #Create service url
-service_url = url + urllib.parse.urlencode({'access_key': api_key}) +'&'+ urllib.parse.urlencode({'query': city})
+#service_url = url + urllib.parse.urlencode({'access_key': api_key}) +'&'+ urllib.parse.urlencode({'query': city})
+service_url = url + urllib.parse.urlencode(params)
 
 #Print genearted service url !Remeber it contains the api key
 print(service_url) 
