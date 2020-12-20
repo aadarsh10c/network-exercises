@@ -14,10 +14,13 @@ with open('weatherAPI.txt','r') as f:
 #Create service url
 service_url = url + urllib.parse.urlencode({'access_key': api_key}) +'&'+ urllib.parse.urlencode({'query': city})
 
+#Print genearted service url !Remeber it contains the api key
 print(service_url) 
+
 
 data = urllib.request.urlopen(service_url).read()
 
+#decode data to string
 info=data.decode()
 
 js=json.loads(info)
