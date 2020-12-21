@@ -1,7 +1,8 @@
 #Retrieve latitude and longitude of a given location
 
 import json
-import urllib.request , urllib.parse
+#import urllib.request , urllib.parse
+import requests
 
 city= input("eneter city name: ")
 url='http://api.weatherstack.com/current?'
@@ -10,24 +11,25 @@ url='http://api.weatherstack.com/current?'
 with open('weatherAPI.txt','r') as f:
     api_key=f.read()
     
-params = {}
-params['access_key']=api_key
-params['query']=city    
+payload = {}
+payload['access_key']=api_key
+payload['query']=city    
 #Create service url
 #service_url = url + urllib.parse.urlencode({'access_key': api_key}) +'&'+ urllib.parse.urlencode({'query': city})
-service_url = url + urllib.parse.urlencode(params)
+#service_url = url + urllib.parse.urlencode(payload)
 
 #Print genearted service url !Remeber it contains the api key
-print(service_url) 
+#print(service_url) 
 
 
-data = urllib.request.urlopen(service_url).read()
-
+#data = urllib.request.urlopen(service_url).read()
+data = requests.get(url, params=payload)
+print(data.url)
 #decode data to string
-info=data.decode()
+#info=data.decode()
 
-js=json.loads(info)
-
+#js=json.loads(info)
+js = data.json()
 #print(js)
 finalInfo = f"""
 Location : {js["location"]["name"]}
